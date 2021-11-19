@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import protobuf from 'protobufjs';
-import MainLayout from '@components/_layouts/MainLayout';
-const { Buffer } = require('buffer/');
+import Stock from '@components/home/Stock';
 
+const { Buffer } = require('buffer/');
 interface MessageBuffer extends protobuf.Message {
 	id?: string;
 	price?: string;
@@ -34,7 +34,7 @@ const Index = (): JSX.Element => {
 				console.log('connected');
 				ws.send(
 					JSON.stringify({
-						subscribe: (params.get('symbols') || 'AAPL')
+						subscribe: (params.get('symbols') || 'TLKM.JK')
 							.split(',')
 							.map((symbol) => symbol.toUpperCase()),
 					})
@@ -79,18 +79,17 @@ const Index = (): JSX.Element => {
 			};
 		});
 	}, []);
+
 	return (
-		<MainLayout title="Home">
-			<div className="stonks">
-				{stonks.map((stonk) => (
-					<div className="stonk" key={stonk.id}>
-						<h2 className={stonk.direction}>
-							{stonk.id} {formatPrice(stonk.price)} {emojis[stonk.direction]}
-						</h2>
-					</div>
-				))}
-			</div>
-		</MainLayout>
+		<div className="stonks">
+			{stonks.map((stonk) => (
+				<div className="stonk" key={stonk.id}>
+					<h2 className={stonk.direction}>
+						{stonk.id} {formatPrice(stonk.price)} {emojis[stonk.direction]}
+					</h2>
+				</div>
+			))}
+		</div>
 	);
 };
 

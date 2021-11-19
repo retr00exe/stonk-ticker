@@ -13,7 +13,8 @@ module.exports = {
 			colors: {
 				base: '#ffffff',
 				primary: '#3b3b3b',
-				accent: '#FF5B14',
+				green: '#1DCC98',
+				dark: '#03314B',
 				info: '#2DA7FB',
 				warning: '#FFCB11',
 				danger: '#ec4141',

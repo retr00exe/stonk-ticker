@@ -7,12 +7,11 @@ import AlertHandler from '@components/_shared/AlertHandler';
 
 interface Props {
 	children: React.ReactNode;
-	title?: string;
 	className?: string;
 	style?: React.CSSProperties;
 }
 
-const MainLayout = ({ children, title, className, style }: Props): JSX.Element => {
+const MainLayout = ({ children, className, style }: Props): JSX.Element => {
 	const { alert_value } = useLayout();
 	const [clearance, upperRef, lowerRef] = useClearance();
 

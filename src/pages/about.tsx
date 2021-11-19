@@ -1,8 +1,7 @@
 import React from 'react';
-import MainLayout from '@components/_layouts/MainLayout';
 
 const About = (): JSX.Element => {
-	return <MainLayout title="About">About</MainLayout>;
+	return <div>About</div>;
 };
 
 export default About;
