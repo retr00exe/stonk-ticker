@@ -7,18 +7,15 @@ const Navbar = (): JSX.Element => {
 			<div className="max-w-6xl mx-auto px-4">
 				<div className="flex justify-between">
 					<div className="flex space-x-4">
-						{/* <!-- logo --> */}
 						<div>
 							<Link
 								to="/"
-								className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900"
+								className="flex items-center py-4 px-2 text-gray-700 hover:text-gray-900"
 							>
 								<img src="./icons/logo.webp" alt="logo" className="w-12 h-12 object-cover mr-2" />
 								<span className="font-bold">Stonk Ticker</span>
 							</Link>
 						</div>
-
-						{/* <!-- primary nav --> */}
 						<div className="hidden md:flex items-center space-x-1">
 							<Link to="/feature" className="py-5 px-3 text-gray-700 hover:text-gray-900">
 								Features
@@ -28,8 +25,6 @@ const Navbar = (): JSX.Element => {
 							</Link>
 						</div>
 					</div>
-
-					{/* <!-- secondary nav --> */}
 					<div className="hidden md:flex items-center space-x-1">
 						<Link to="/login" className="py-5 px-3">
 							Login
@@ -41,8 +36,6 @@ const Navbar = (): JSX.Element => {
 							Signup
 						</Link>
 					</div>
-
-					{/* <!-- mobile button goes here --> */}
 					<div className="md:hidden flex items-center">
 						<button className="mobile-menu-button">
 							<svg
@@ -63,8 +56,6 @@ const Navbar = (): JSX.Element => {
 					</div>
 				</div>
 			</div>
-
-			{/* <!-- mobile menu --> */}
 			<div className="mobile-menu hidden md:hidden">
 				<Link to="/feature" className="block py-2 px-4 text-sm hover:bg-gray-200">
 					Features

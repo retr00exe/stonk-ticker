@@ -8,8 +8,8 @@ const Index = (): JSX.Element => {
 	return (
 		<section className="w-full">
 			<div className="container">
-				{/* <IDX />
-				<NYSE />
+				<IDX />
+				{/* <NYSE />
 				<Nasdaq /> */}
 				<Compare />
 			</div>

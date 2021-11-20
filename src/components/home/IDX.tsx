@@ -1,15 +1,15 @@
 import React from 'react';
 import Stock from '@components/home/Stock';
-import { comparisonData } from '@core/data/comparison';
+import { idxData } from '@core/data/idx';
 
 const Main = () => {
 	return (
 		<div className="my-10">
 			<h1 className="text-2xl font-semibold mb-4">IDX Market</h1>
 			<div>
-				{comparisonData.map((item) => (
+				{idxData.map((item) => (
 					<div key={item.id} className="mb-2">
-						<Stock ticker={item.id} name={item.name} logo={item.logo} />
+						<Stock ticker={item.id} name={item.name} logo={item.logo} market="idx" />
 					</div>
 				))}
 			</div>

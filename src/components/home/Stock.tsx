@@ -11,15 +11,16 @@ interface Props {
 	ticker: string;
 	name: string;
 	logo: string;
+	market?: string;
 }
 
 /**
- * "Mau recode ijin dulu bosss jgn asal comot 😁🤙"
- * -quote by bocil termux
+ * "Mau recode ngaca dulu bosss 😁🤙"
+ * ~bocil termux
  *
  */
 
-const Stock = ({ ticker, name, logo }: Props): JSX.Element => {
+const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -98,7 +99,11 @@ const Stock = ({ ticker, name, logo }: Props): JSX.Element => {
 	return (
 		<>
 			<div className="text-xl flex-sc gap-2">
-				<img src={logo} alt={name} className="w-12 h-12 mr-2 scale-75" />
+				<img
+					src={logo}
+					alt={name}
+					className={`${market === 'idx' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'}`}
+				/>
 				<h1 className="font-semibold mr-2">{name}</h1>
 				{isLoaded ? (
 					<div className={`${stonks[0].direction} flex gap-2`}>
@@ -108,7 +113,7 @@ const Stock = ({ ticker, name, logo }: Props): JSX.Element => {
 						</p>
 					</div>
 				) : (
-					<p className="text-sm text-gray-300">Connecting to API, please wait 👻</p>
+					<p className="text-sm text-gray-300">Connecting to API...</p>
 				)}
 			</div>
 		</>
