@@ -7,11 +7,14 @@ interface MessageBuffer extends protobuf.Message {
 	price?: string;
 }
 
+type MarketType = 'IDX' | 'Nasdaq' | 'NYSE' | 'Compare';
+
 interface Props {
 	ticker: string;
 	name: string;
 	logo: string;
-	market?: string;
+	order?: number;
+	market?: MarketType;
 }
 
 /**
@@ -20,9 +23,10 @@ interface Props {
  *
  */
 
-const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
+const Stock = ({ ticker, name, logo, order, market }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState([]);
-	const [isLoaded, setIsLoaded] = useState(false);
+	const [isDataLoaded, setIsDataLoaded] = useState(false);
+	const [isWebsocketConnected, setIsWebsocketConnected] = useState(false);
 
 	const emojis = {
 		'': '',
@@ -45,6 +49,11 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 
 			ws.onopen = function open() {
 				console.log(`${ticker} connected`);
+				setIsWebsocketConnected(true);
+				/**
+				 * Market close weekends! Redirect to REST API endpoint instead of WebSocket
+				 */
+
 				ws.send(
 					JSON.stringify({
 						subscribe: (params.get('symbols') || ticker)
@@ -88,7 +97,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 						];
 					}
 				});
-				setIsLoaded(true);
+				setIsDataLoaded(true);
 			};
 		});
 		return () => {
@@ -97,26 +106,30 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	}, [ticker]);
 
 	return (
-		<>
-			<div className="text-xl flex-sc gap-2">
+		<tr className="text-xl border-b border-gray-100 cursor-pointer hover:bg-gray-50 transform transition duration-200 ease-in-out">
+			<td className="flex-sc py-3 px-5">
 				<img
 					src={logo}
 					alt={name}
-					className={`${market === 'idx' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'}`}
+					className={`${market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'}`}
 				/>
 				<h1 className="font-semibold mr-2">{name}</h1>
-				{isLoaded ? (
+			</td>
+			<td>
+				{isDataLoaded ? (
 					<div className={`${stonks[0].direction} flex gap-2`}>
 						<h2>{stonks[0].fromcurrency}</h2>
 						<p>
 							{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
 						</p>
 					</div>
+				) : isWebsocketConnected ? (
+					<p className="text-sm text-gray-300">Connected! Waiting for ticker response...</p>
 				) : (
 					<p className="text-sm text-gray-300">Connecting to API...</p>
 				)}
-			</div>
-		</>
+			</td>
+		</tr>
 	);
 };
 
