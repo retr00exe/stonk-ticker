@@ -8,9 +8,9 @@ const Index = (): JSX.Element => {
 	return (
 		<section className="w-full">
 			<div className="container">
-				<IDX />
+				{/* <IDX />
 				<NYSE />
-				<Nasdaq />
+				<Nasdaq /> */}
 				<Compare />
 			</div>
 		</section>

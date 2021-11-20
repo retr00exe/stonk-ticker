@@ -9,17 +9,24 @@ interface MessageBuffer extends protobuf.Message {
 
 interface Props {
 	ticker: string;
-	name?: string;
-	logo?: string;
+	name: string;
+	logo: string;
 }
 
-const Stock = ({ ticker }: Props): JSX.Element => {
+/**
+ * "Mau recode ijin dulu bosss jgn asal comot 😁🤙"
+ * -quote by bocil termux
+ *
+ */
+
+const Stock = ({ ticker, name, logo }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState([]);
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	const emojis = {
 		'': '',
-		up: '🚀',
-		down: '💩',
+		up: '',
+		down: '',
 	};
 
 	const formatPrice = (price) => {
@@ -80,20 +87,31 @@ const Stock = ({ ticker }: Props): JSX.Element => {
 						];
 					}
 				});
+				setIsLoaded(true);
 			};
 		});
+		return () => {
+			ws.close();
+		};
 	}, [ticker]);
 
 	return (
-		<div className="">
-			{stonks.map((stonk) => (
-				<div className="text-xl" key={stonk.id}>
-					<h2 className={stonk.direction}>
-						{stonk.fromcurrency} {formatPrice(stonk.price)} {emojis[stonk.direction]}
-					</h2>
-				</div>
-			))}
-		</div>
+		<>
+			<div className="text-xl flex-sc gap-2">
+				<img src={logo} alt={name} className="w-12 h-12 mr-2 scale-75" />
+				<h1 className="font-semibold mr-2">{name}</h1>
+				{isLoaded ? (
+					<div className={`${stonks[0].direction} flex gap-2`}>
+						<h2>{stonks[0].fromcurrency}</h2>
+						<p>
+							{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
+						</p>
+					</div>
+				) : (
+					<p className="text-sm text-gray-300">Connecting to API, please wait 👻</p>
+				)}
+			</div>
+		</>
 	);
 };
 

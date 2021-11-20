@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Author
+
+Erandri Mekel Ilyasa
+21120119130108
+MDP 2021
+
 ## Available Scripts
 
 In the project directory, you can run:
