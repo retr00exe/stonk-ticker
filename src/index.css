@@ -12,18 +12,6 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.stonks {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.stonk {
-	white-space: nowrap;
-	margin: clamp(1rem, 10vmin, 50rem);
-	transition: color 500ms ease, font-size 300ms ease;
-}
-
 .up {
 	color: green;
 }
