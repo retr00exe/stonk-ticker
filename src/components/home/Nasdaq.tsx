@@ -1,13 +1,13 @@
 import React from 'react';
 import StockRealtime from '@components/home/Stock.main';
 import StockStatic from '@components/home/Stock.closed';
-import { idxData } from '@core/data/idx';
+import { nasdaqData } from '@core/data/nasdaq';
 import { isWeekend } from '@core/utils/date';
 
 const Nasdaq = () => {
 	return (
 		<div className="my-10">
-			<h1 className="text-2xl font-semibold mb-6">IDX Market</h1>
+			<h1 className="text-2xl font-semibold mb-6">Nasdaq Market</h1>
 			<table className="w-full text-left border border-gray-100">
 				<thead className="w-full border-b border-gray-100">
 					<tr>
@@ -16,7 +16,7 @@ const Nasdaq = () => {
 					</tr>
 				</thead>
 				<tbody className="w-full">
-					{idxData.slice(0, 2).map((item, index) =>
+					{nasdaqData.map((item, index) =>
 						/**
 						 * Stock market close weekends! Fetching data to REST API endpoint instead of listening to WebSocket API
 						 */

@@ -1,6 +1,6 @@
 import React from 'react';
 import IDX from '@components/home/IDX';
-import NYSE from '@components/home/NYSE';
+// import NYSE from '@components/home/NYSE';
 import Nasdaq from '@components/home/Nasdaq';
 import Compare from '@components/home/Compare';
 
@@ -9,8 +9,8 @@ const Index = (): JSX.Element => {
 		<section className="w-full">
 			<div className="container">
 				<IDX />
-				{/* <NYSE />
-				<Nasdaq /> */}
+				{/* <NYSE /> */}
+				<Nasdaq />
 				<Compare />
 			</div>
 		</section>

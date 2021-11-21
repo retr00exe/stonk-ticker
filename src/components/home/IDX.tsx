@@ -8,7 +8,7 @@ const IDX = () => {
 	return (
 		<div className="my-10">
 			<h1 className="text-2xl font-semibold mb-6">IDX Market</h1>
-			<table className="w-full text-left border border-gray-100">
+			<table className="w-full text-left border border-gray-100 rounded-xl">
 				<thead className="w-full border-b border-gray-100">
 					<tr>
 						<th className="py-5 px-8">Name</th>

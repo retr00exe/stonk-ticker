@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 /**
  * @name Stock.main.tsx
@@ -78,26 +79,32 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	}, []);
 
 	return (
-		<tr className="text-xl border-b border-gray-100 cursor-pointer hover:bg-gray-50 transform transition duration-200 ease-in-out">
-			<td className="flex-sc py-3 px-5 w-2/3">
-				<img
-					src={logo}
-					alt={name}
-					className={`${market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'}`}
-				/>
-				<h1 className="font-semibold mr-2">{name}</h1>
-			</td>
+		<tr className="text-xl border-b border-gray-100 hover:bg-gray-50 transform transition duration-200 ease-in-out cursor-pointer">
+			<Link to={`/${ticker}`}>
+				<td className="flex-sc py-3 px-5 w-2/3">
+					<img
+						src={logo}
+						alt={name}
+						className={`${
+							market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'
+						}`}
+					/>
+					<h1 className="font-semibold mr-2">{name}</h1>
+				</td>
+			</Link>
 			<td className="w-1/3">
-				{isDataLoaded ? (
-					<div className={`${stonks[0].direction} flex gap-2`}>
-						<h2>{stonks[0].fromcurrency}</h2>
-						<p>
-							{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
-						</p>
-					</div>
-				) : (
-					<p className="text-sm text-gray-300">Fetching data to REST API...</p>
-				)}
+				<Link to={`/${ticker}`}>
+					{isDataLoaded ? (
+						<div className={`${stonks[0].direction} flex gap-2`}>
+							<h2>{stonks[0].fromcurrency}</h2>
+							<p>
+								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
+							</p>
+						</div>
+					) : (
+						<p className="text-sm text-gray-300">Fetching data to REST API...</p>
+					)}
+				</Link>
 			</td>
 		</tr>
 	);
