@@ -1,20 +1,49 @@
 import React from 'react';
-import Stock from '@components/home/Stock';
-import { comparisonData } from '@core/data/comparison';
+import StockRealtime from '@components/home/Stock.main';
+import StockStatic from '@components/home/Stock.closed';
+import { idxData } from '@core/data/idx';
+import { isWeekend } from '@core/utils/date';
 
-const Main = () => {
+const Nasdaq = () => {
 	return (
 		<div className="my-10">
-			<h1 className="text-2xl font-semibold mb-4">Nasdaq Market</h1>
-			<div>
-				{comparisonData.map((item) => (
-					<div key={item.id} className="mb-2">
-						<Stock ticker={item.id} name={item.name} logo={item.logo} />
-					</div>
-				))}
-			</div>
+			<h1 className="text-2xl font-semibold mb-6">IDX Market</h1>
+			<table className="w-full text-left border border-gray-100">
+				<thead className="w-full border-b border-gray-100">
+					<tr>
+						<th className="py-5 px-8">Name</th>
+						<th className="py-5">Price</th>
+					</tr>
+				</thead>
+				<tbody className="w-full">
+					{idxData.slice(0, 2).map((item, index) =>
+						/**
+						 * Stock market close weekends! Fetching data to REST API endpoint instead of listening to WebSocket API
+						 */
+						!isWeekend(new Date()) ? (
+							<StockRealtime
+								ticker={item.id}
+								name={item.name}
+								logo={item.logo}
+								order={index + 1}
+								key={item.id}
+								market="Nasdaq"
+							/>
+						) : (
+							<StockStatic
+								ticker={item.id}
+								name={item.name}
+								logo={item.logo}
+								order={index + 1}
+								key={item.id}
+								market="Nasdaq"
+							/>
+						)
+					)}
+				</tbody>
+			</table>
 		</div>
 	);
 };
 
-export default Main;
+export default Nasdaq;

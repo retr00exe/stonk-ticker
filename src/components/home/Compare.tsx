@@ -1,5 +1,5 @@
 import React from 'react';
-import Stock from '@components/home/Stock';
+import Stock from '@components/home/Stock.main';
 import { comparisonData } from '@core/data/comparison';
 
 const Compare = () => {
