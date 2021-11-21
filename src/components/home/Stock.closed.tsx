@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { sliceId } from '@core/utils/string';
 
 /**
  * @name Stock.main.tsx
@@ -57,7 +58,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				.then((res) => {
 					const stockResult = res.data.chart.result[0];
 					const price = stockResult.meta.regularMarketPrice;
-					const fromcurrency = stockResult.meta.symbol.replace('.JK', '');
+					const fromcurrency = sliceId(stockResult.meta.symbol);
 
 					setStonks((current) => {
 						return [
@@ -80,8 +81,8 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 
 	return (
 		<tr className="text-xl border-b border-gray-100 hover:bg-gray-50 transform transition duration-200 ease-in-out cursor-pointer">
-			<Link to={`/${ticker}`}>
-				<td className="flex-sc py-3 px-5 w-2/3">
+			<Link to={`/${market}/${ticker}`}>
+				<td className="flex-sc py-3 px-5 w-3/4">
 					<img
 						src={logo}
 						alt={name}
@@ -89,14 +90,14 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 							market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'
 						}`}
 					/>
-					<h1 className="font-semibold mr-2">{name}</h1>
+					<h1 className="font-semibold mr-3">{name}</h1>
+					<h2 className="text-gray-400 font-light tracking-wider">({sliceId(ticker)})</h2>
 				</td>
 			</Link>
-			<td className="w-1/3">
-				<Link to={`/${ticker}`}>
+			<td className="w-1/4">
+				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded ? (
 						<div className={`${stonks[0].direction} flex gap-2`}>
-							<h2>{stonks[0].fromcurrency}</h2>
 							<p>
 								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
 							</p>

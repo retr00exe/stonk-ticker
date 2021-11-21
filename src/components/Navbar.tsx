@@ -12,7 +12,7 @@ const Navbar = (): JSX.Element => {
 								to="/"
 								className="flex items-center py-4 px-2 text-gray-700 hover:text-gray-900"
 							>
-								<img src="./icons/logo.webp" alt="logo" className="w-12 h-12 object-cover mr-2" />
+								<img src="/icons/logo.webp" alt="logo" className="w-12 h-12 object-cover mr-2" />
 								<span className="font-bold">Stonk Ticker</span>
 							</Link>
 						</div>

@@ -7,7 +7,7 @@ const Footer = (): JSX.Element => {
 			<div className="xl:px-40 pb-12 lg:px-20 md:px-10 sm:px-5 px-10">
 				<div className="w-full pt-12 flex flex-col sm:flex-row space-y-2 justify-start">
 					<div className="w-full sm:w-2/5 pr-6 flex flex-col space-y-4">
-						<img src="./icons/logo.webp" alt="logo" className="w-56 h-56 object-cover mr-2 logo" />
+						<img src="/icons/logo.webp" alt="logo" className="w-56 h-56 object-cover mr-2 logo" />
 						<p className="opacity-60">Real-time market ticker, baby!</p>
 					</div>
 					<div className="w-full sm:w-1/5 flex flex-col space-y-4">
