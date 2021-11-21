@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import '@core/styles/tailwind.css';
 import AppProvider from '@core/contexts';
+import '@core/styles/typefaces.css';
+import '@core/styles/tailwind.css';
+import './index.css';
 
 ReactDOM.render(
 	<React.StrictMode>

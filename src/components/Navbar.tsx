@@ -31,7 +31,7 @@ const Navbar = (): JSX.Element => {
 						</Link>
 						<Link
 							to="/signup"
-							className="py-2 px-3 bg-green hover:bg-yellow-300 text-white hover:text-yellow-800 rounded-full transition duration-300"
+							className="py-2 px-3 bg-blue hover:bg-darkBlue text-white rounded-full transition duration-300"
 						>
 							Signup
 						</Link>

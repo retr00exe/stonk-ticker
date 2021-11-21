@@ -16,7 +16,7 @@ const IDX = () => {
 					</tr>
 				</thead>
 				<tbody className="w-full">
-					{idxData.slice(0, 2).map((item, index) =>
+					{idxData.map((item, index) =>
 						/**
 						 * Stock market close weekends! Fetching data to REST API endpoint instead of listening to WebSocket API
 						 */

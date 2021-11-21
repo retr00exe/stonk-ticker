@@ -37,17 +37,20 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 		return market === 'IDX' ? `Rp.${price.toFixed(2)}` : `$${price.toFixed(2)}`;
 	};
 
+	/**
+	 * Set up CORS reverse proxy server to prevent CORS same origin policy
+	 */
+	const proxyUrl = process.env.REACT_APP_CORS_PROXY_URL;
+	const stonksUrl = process.env.REACT_APP_REDACTED_REST_ENDPOINT;
+
 	useEffect(() => {
 		const getStockData = async () => {
 			await axios
-				.get(`${process.env.REACT_APP_REDACTED_REST_ENDPOINT}/v8/finance/chart/${ticker}`, {
+				.get(`${proxyUrl}${stonksUrl}/v8/finance/chart/${ticker}`, {
 					params: {
 						range: '1d',
 						interval: '1d',
 						lang: 'en',
-					},
-					headers: {
-						'X-API-KEY': process.env.REACT_APP_REST_API_KEY,
 					},
 				})
 				.then((res) => {

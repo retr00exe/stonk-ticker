@@ -45,7 +45,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	};
 
 	const formatPrice = (price: number) => {
-		return market === 'IDX' ? `Rp. ${price.toFixed(2)}` : `$${price.toFixed(2)}`;
+		return market === 'IDX' ? `Rp.${price.toFixed(2)}` : `$${price.toFixed(2)}`;
 	};
 
 	useEffect(() => {
