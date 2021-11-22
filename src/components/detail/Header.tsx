@@ -19,17 +19,22 @@ const Header = () => {
 	return (
 		<div className="my-10 flex-bs">
 			<div className="flex-cs col">
-				<h1 className="text-4xl font-semibold">
+				<h1 className="text-4xl -sm:text-xl font-semibold">
 					{data.name} <span className="text-sm text-gray-600">({sliceId(id)})</span>
 				</h1>
-				<p className="mt-2 text-gray-400 font-light text-lg">{data.market}</p>
+				<p className="mt-2 text-gray-400 font-light text-lg -sm:text-sm">{data.market}</p>
 				<div className="flex-sc gap-4 mt-5">
-					<img src={data.logo} alt="BBCA" className="w-32 h-32" />
+					<img src={data.logo} alt="BBCA" className="w-32 h-32 -sm:w-16 -sm:h-16" />
 				</div>
 			</div>
-			<div className="flex-cc gap-2 border py-2 px-4 rounded-full font-semibold border-gray-500 cursor-pointer hover:border-darkBlue text-gray-500 hover:text-darkBlue transition duration-400">
+			<div className="flex-cc gap-2 border py-2 px-4 -sm:px-2 -sm:py-1 rounded-full border-gray-500 cursor-pointer hover:border-darkBlue text-gray-500 hover:text-darkBlue transition duration-400 -sm:text-xs">
 				<span>Add to Watchlist</span>
-				<AiOutlineStar size={18} />
+				<div className="-sm:hidden">
+					<AiOutlineStar size={18} />
+				</div>
+				<div className="sm:hidden flex-cc">
+					<AiOutlineStar size={14} />
+				</div>
 			</div>
 		</div>
 	);

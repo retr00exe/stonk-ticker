@@ -20,7 +20,7 @@ const MainLayout = ({ children, className, style }: Props): JSX.Element => {
 			<header ref={upperRef}>
 				<Navbar />
 			</header>
-			<main style={{ minHeight: clearance, ...style }} className={className}>
+			<main style={{ minHeight: clearance, ...style }} className={`${className} mt-28`}>
 				{children}
 			</main>
 			<footer ref={lowerRef}>

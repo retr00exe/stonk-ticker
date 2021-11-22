@@ -6,7 +6,7 @@ import Compare from '@components/home/Compare';
 
 const Index = (): JSX.Element => {
 	return (
-		<section className="w-full">
+		<section className="w-full max-w-6xl mx-auto">
 			<div className="container">
 				<IDX />
 				{/* <NYSE /> */}

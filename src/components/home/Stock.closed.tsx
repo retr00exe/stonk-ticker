@@ -66,7 +66,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 							{
 								price,
 								fromcurrency,
-								direction: 'up',
+								direction: '',
 							},
 						];
 					});
@@ -82,28 +82,34 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	return (
 		<tr className="text-xl border-b border-gray-100 hover:bg-gray-50 transform transition duration-200 ease-in-out cursor-pointer">
 			<Link to={`/${market}/${ticker}`}>
-				<td className="flex-sc py-3 px-5 w-3/4">
+				<td className="flex-sc py-3 px-5 w-full">
 					<img
 						src={logo}
 						alt={name}
 						className={`${
-							market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'
+							market === 'IDX'
+								? 'w-12 h-12 mr-2 scale-75 -sm:w-10 -sm:h-10'
+								: 'w-12 h-12 mr-2 scale-75 -sm:w-8 -sm:h-8'
 						}`}
 					/>
-					<h1 className="font-semibold mr-3">{name}</h1>
-					<h2 className="text-gray-400 font-light tracking-wider">({sliceId(ticker)})</h2>
+					<div className="flex-cc -sm:col -sm:flex-ss">
+						<h1 className="font-semibold mr-3 -sm:text-sm">{name}</h1>
+						<h2 className="text-gray-400 font-light tracking-wider -sm:text-sm">
+							({sliceId(ticker)})
+						</h2>
+					</div>
 				</td>
 			</Link>
 			<td className="w-1/4">
 				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded ? (
 						<div className={`${stonks[0].direction} flex gap-2`}>
-							<p>
+							<p className="-sm:text-sm">
 								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
 							</p>
 						</div>
 					) : (
-						<p className="text-sm text-gray-300">Fetching data to REST API...</p>
+						<p className="text-sm text-gray-300 -sm:text-xs">Fetching data to REST API...</p>
 					)}
 				</Link>
 			</td>

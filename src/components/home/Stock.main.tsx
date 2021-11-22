@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import protobuf from 'protobufjs';
 import { isWeekend } from '@core/utils/date';
+import { sliceId } from '@core/utils/string';
 
 const { Buffer } = require('buffer/');
 
@@ -137,31 +139,45 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 
 	return (
 		<tr className="text-xl border-b border-gray-100 cursor-pointer hover:bg-gray-50 transform transition duration-200 ease-in-out">
-			<td className="flex-sc py-3 px-5 w-2/3">
-				<img
-					src={logo}
-					alt={name}
-					className={`${market === 'IDX' ? 'w-12 h-12 mr-2 scale-75' : 'w-12 h-12 mr-2 scale-75'}`}
-				/>
-				<h1 className="font-semibold mr-2">{name}</h1>
-			</td>
-			<td className="w-1/3">
-				{isDataLoaded ? (
-					<div className={`${stonks[0].direction} flex gap-2`}>
-						<h2>{stonks[0].fromcurrency}</h2>
-						<p>
-							{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
-						</p>
+			<Link to={`/${market}/${ticker}`}>
+				<td className="flex-sc py-3 px-5 w-full">
+					<img
+						src={logo}
+						alt={name}
+						className={`${
+							market === 'IDX'
+								? 'w-12 h-12 mr-2 scale-75 -sm:w-10 -sm:h-10'
+								: 'w-12 h-12 mr-2 scale-75 -sm:w-8 -sm:h-8'
+						}`}
+					/>
+					<div className="flex-cc -sm:col -sm:flex-ss">
+						<h1 className="font-semibold mr-3 -sm:text-sm">{name}</h1>
+						<h2 className="text-gray-400 font-light tracking-wider -sm:text-sm">
+							({sliceId(ticker)})
+						</h2>
 					</div>
-				) : isRedirect ? (
-					<p className="text-sm text-gray-300">Redirecting to REST API server...</p>
-				) : isDisconnected ? (
-					<p className="text-sm text-gray-300">Disconnected from WebSocket server!</p>
-				) : isWebsocketConnected ? (
-					<p className="text-sm text-gray-300">Connected! Waiting for ticker response...</p>
-				) : (
-					<p className="text-sm text-gray-300">Connecting to WebSocket API...</p>
-				)}
+				</td>
+			</Link>
+			<td className="w-1/4">
+				<Link to={`/${market}/${ticker}`}>
+					{isDataLoaded ? (
+						<div className={`${stonks[0].direction} flex gap-2`}>
+							<p className="-sm:text-sm">
+								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
+							</p>
+						</div>
+					) : isRedirect ? (
+						<p className="text-sm text-gray-300 -sm:text-xs">Redirecting to REST API server...</p>
+					) : isDisconnected ? (
+						<p className="text-sm text-gray-300 -sm:text-xs">Disconnected from WebSocket server!</p>
+					) : isWebsocketConnected ? (
+						<p className="text-sm text-gray-300 -sm:text-xs">
+							Connected! Waiting for ticker response...
+						</p>
+					) : (
+						<p className="text-sm text-gray-300 -sm:text-xs">Connecting to WebSocket API...</p>
+					)}
+				</Link>
 			</td>
 		</tr>
 	);

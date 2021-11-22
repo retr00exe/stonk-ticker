@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+// import lottie from 'lottie-web';
 
 const Footer = (): JSX.Element => {
+	// const container = useRef(null);
+
+	// useEffect(() => {
+	// 	lottie.loadAnimation({
+	// 		container: container.current,
+	// 		renderer: 'svg',
+	// 		loop: true,
+	// 		autoplay: true,
+	// 		animationData: require('../core/data/mobile.lottie.json'),
+	// 	});
+	// }, []);
+
 	return (
 		<div className="w-full border-t border-gray-200">
 			<div className="xl:px-40 pb-12 lg:px-20 md:px-10 sm:px-5 px-10">
 				<div className="w-full pt-12 flex flex-col sm:flex-row space-y-2 justify-start">
 					<div className="w-full sm:w-2/5 pr-6 flex flex-col space-y-4">
 						<img src="/icons/logo.webp" alt="logo" className="w-56 h-56 object-cover mr-2 logo" />
+						{/* <div className="w-56 h-56" ref={container}></div> */}
 						<p className="opacity-60">Real-time market ticker, baby!</p>
 					</div>
 					<div className="w-full sm:w-1/5 flex flex-col space-y-4">

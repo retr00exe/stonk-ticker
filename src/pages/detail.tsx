@@ -5,7 +5,7 @@ import About from '@components/detail/About';
 
 const Detail = (): JSX.Element => {
 	return (
-		<section className="w-full">
+		<section className="w-full max-w-6xl mx-auto">
 			<div className="container">
 				<Header />
 				<Chart />

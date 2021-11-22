@@ -9,7 +9,7 @@ import './App.css';
 const App = () => {
 	return (
 		<Router>
-			<MainLayout className="max-w-6xl mx-auto my-10">
+			<MainLayout className="w-full py-0">
 				<Routes>
 					<Route path="/" element={<Index />} />
 					<Route path="/login" element={<Login />} />
