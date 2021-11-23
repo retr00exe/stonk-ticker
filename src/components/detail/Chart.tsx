@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Chart from 'react-apexcharts';
 import { useParams } from 'react-router';
+import moment from 'moment';
 
 const proxyUrl = process.env.REACT_APP_CORS_PROXY_URL;
 const stonksUrl = process.env.REACT_APP_REDACTED_REST_ENDPOINT;
 
 const getStonks = async (ticker: string) => {
-	const response = await fetch(`${proxyUrl}${stonksUrl}/v8/finance/chart/${ticker}`);
+	const response = await fetch(
+		`${proxyUrl}${stonksUrl}/v8/finance/chart/${ticker}?range=1y&interval=1d`
+	);
 	return response.json();
 };
 
@@ -21,9 +24,18 @@ const chart = {
 		chart: {
 			height: 350,
 		},
-		yaxis: {
-			tooltip: {
-				enabled: true,
+		tooltip: {
+			enabled: true,
+		},
+		dataLabels: {
+			enabled: false,
+		},
+		xaxis: {
+			labels: {
+				show: false,
+				datetimeFormatter: {
+					year: 'yyyy',
+				},
 			},
 		},
 	},
@@ -36,18 +48,19 @@ const round = (number) => {
 const ChartData = () => {
 	const [series, setSeries] = useState([
 		{
+			type: 'area',
+			name: 'price',
 			data: [],
 		},
 	]);
 
 	const { id, market } = useParams();
 
-	const [price, setPrice] = useState(-1);
-	const [prevPrice, setPrevPrice] = useState(-1);
+	const [price, setPrice] = useState(null);
+	const [prevPrice, setPrevPrice] = useState(null);
 	const [priceTime, setPriceTime] = useState(null);
 
 	useEffect(() => {
-		let timeoutId;
 		async function getLatestPrice() {
 			try {
 				const data = await getStonks(id);
@@ -58,42 +71,34 @@ const ChartData = () => {
 				setPriceTime(new Date(gme.meta.regularMarketTime * 1000));
 				const quote = gme.indicators.quote[0];
 				const prices = gme.timestamp.map((timestamp, index) => ({
-					x: new Date(timestamp * 1000),
+					x: moment(new Date(timestamp * 1000)).format('MM/DD/YYYY'),
 					y: [quote.open[index], quote.high[index], quote.low[index], quote.close[index]].map(
 						round
 					),
 				}));
 				setSeries([
 					{
+						type: 'area',
+						name: 'price',
 						data: prices,
 					},
 				]);
 			} catch (error) {
 				console.log(error);
 			}
-			timeoutId = setTimeout(getLatestPrice, 5000 * 2);
 		}
 
 		getLatestPrice();
 
-		return () => {
-			clearTimeout(timeoutId);
-		};
+		return () => {};
 	}, []);
-
-	const direction = useMemo(
-		() => (prevPrice < price ? 'up' : prevPrice > price ? 'down' : ''),
-		[prevPrice, price]
-	);
 
 	return (
 		<div>
 			<div className="ticker">{id}</div>
-			<div className={['price', direction].join(' ')}>
-				${price} {directionEmojis[direction]}
-			</div>
+			<div>${price}</div>
 			<div className="price-time">{priceTime && priceTime.toLocaleTimeString()}</div>
-			<Chart type="candlestick" options={chart.options} series={series} width="100%" height={320} />
+			<Chart type="area" options={chart.options} series={series} width="100%" height={400} />
 		</div>
 	);
 };

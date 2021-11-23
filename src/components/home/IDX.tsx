@@ -13,7 +13,7 @@ const IDX = () => {
 		<div className="my-10 -sm:text-sm">
 			<h1 className="text-2xl font-semibold mb-6">
 				IDX Market{' '}
-				<span className="text-sm text-gray-300">({!isOpen && 'Market is closed right now'})</span>
+				<span className="text-sm text-gray-300">{!isOpen && '(Market is closed right now)'}</span>
 			</h1>
 			<table className="w-full text-left border border-gray-100 rounded-xl">
 				<thead className="w-full border-b border-gray-100">

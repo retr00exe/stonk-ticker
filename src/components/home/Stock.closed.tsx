@@ -28,6 +28,7 @@ interface Props {
 const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState([]);
 	const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+	const [isFailed, setIsFailed] = useState<boolean>(false);
 
 	const emojis = {
 		'': '',
@@ -74,6 +75,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				})
 				.catch((err) => {
 					console.log(err);
+					setIsFailed(true);
 				});
 		};
 		getStockData();
@@ -108,6 +110,8 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
 							</p>
 						</div>
+					) : isFailed ? (
+						<p className="text-sm text-gray-300 -sm:text-xs">Failed to fetch data.</p>
 					) : (
 						<p className="text-sm text-gray-300 -sm:text-xs">Fetching data to REST API...</p>
 					)}
