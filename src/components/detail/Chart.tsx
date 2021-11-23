@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import { useParams } from 'react-router';
 import moment from 'moment';
@@ -13,12 +13,6 @@ const getStonks = async (ticker: string) => {
 	return response.json();
 };
 
-const directionEmojis = {
-	up: '🚀',
-	down: '💩',
-	'': '',
-};
-
 const chart = {
 	options: {
 		chart: {
@@ -31,11 +25,9 @@ const chart = {
 			enabled: false,
 		},
 		xaxis: {
+			tickAmount: 4,
 			labels: {
-				show: false,
-				datetimeFormatter: {
-					year: 'yyyy',
-				},
+				rotate: 0,
 			},
 		},
 	},
@@ -54,10 +46,9 @@ const ChartData = () => {
 		},
 	]);
 
-	const { id, market } = useParams();
+	const { id } = useParams();
 
 	const [price, setPrice] = useState(null);
-	const [prevPrice, setPrevPrice] = useState(null);
 	const [priceTime, setPriceTime] = useState(null);
 
 	useEffect(() => {
@@ -66,7 +57,6 @@ const ChartData = () => {
 				const data = await getStonks(id);
 				console.log(data);
 				const gme = data.chart.result[0];
-				setPrevPrice(price);
 				setPrice(gme.meta.regularMarketPrice.toFixed(2));
 				setPriceTime(new Date(gme.meta.regularMarketTime * 1000));
 				const quote = gme.indicators.quote[0];
@@ -87,7 +77,6 @@ const ChartData = () => {
 				console.log(error);
 			}
 		}
-
 		getLatestPrice();
 
 		return () => {};

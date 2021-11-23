@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import protobuf from 'protobufjs';
 import { isWeekend } from '@core/utils/date';
@@ -27,18 +27,15 @@ interface Props {
 	market?: MarketType;
 }
 
-/**
- * "Mau recode ngaca dulu bosss 😁🤙"
- * ~bocil termux
- *
- */
-
 const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState<any[]>([]);
 	const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 	const [isWebsocketConnected, setIsWebsocketConnected] = useState<boolean>(false);
 	const [isDisconnected, setIsDisconnected] = useState<boolean>(false);
 	const [isRedirect, setIsRedirect] = useState<boolean>(false);
+	const [waitingToReconnect, setWaitingToReconnect] = useState<boolean>(null);
+	const [isWebsocketOpen, setIsWebsocketOpen] = useState<boolean>(false);
+	const clientRef = useRef(null);
 
 	const emojis = {
 		'': '',
@@ -51,91 +48,109 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	};
 
 	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		const ws = new WebSocket(process.env.REACT_APP_REDACTED_WEBSOCKET_ENDPOINT);
+		if (waitingToReconnect) {
+			return;
+		}
+		if (!clientRef.current) {
+			const params = new URLSearchParams(window.location.search);
+			const ws = new WebSocket(process.env.REACT_APP_REDACTED_WEBSOCKET_ENDPOINT);
 
-		/**
-		 * Load gRPC protobuf file on public folder
-		 */
-		protobuf.load('./YPricingData.proto', async (error, root) => {
-			if (error) {
-				return console.log(error);
-			}
-			const Yaticker = root.lookupType('yaticker');
+			clientRef.current = ws;
 
-			ws.onopen = function open() {
-				console.log(`${ticker} connected`);
-				setIsWebsocketConnected(true);
-
-				/**
-				 * Stock market close weekends! Fetching data to REST API endpoint instead of listening to WebSocket API
-				 */
-				if (
-					isWeekend(new Date()) &&
-					(market === 'IDX' || market === 'Nasdaq' || market === 'NYSE')
-				) {
-					setIsDisconnected(true);
-					ws.close();
-					setIsRedirect(true);
-				} else {
-					/**
-					 * Subscribe to ticker
-					 */
-					ws.send(
-						JSON.stringify({
-							subscribe: (params.get('symbols') || ticker)
-								.split(',')
-								.map((symbol) => symbol.toUpperCase()),
-						})
-					);
+			/**
+			 * Load gRPC protobuf file on public folder
+			 */
+			protobuf.load('./YPricingData.proto', async (error, root) => {
+				if (error) {
+					return console.log(error);
 				}
-			};
+				const Yaticker = root.lookupType('yaticker');
 
-			ws.onclose = function close() {
-				console.log(`${ticker} disconnected`);
-				setIsDisconnected(true);
-			};
+				ws.onopen = function open() {
+					console.log(`${ticker} connected`);
+					setIsWebsocketConnected(true);
 
-			ws.onmessage = function incoming(message) {
-				/**
-				 * Decode gRPC buffer response
-				 */
-				const next: MessageBuffer = Yaticker.decode(new Buffer(message.data, 'base64'));
-				console.log(next);
-				setStonks((current) => {
-					let stonk = current.find((stonk) => stonk.id === next.id);
-					if (stonk) {
-						return current.map((stonk) => {
-							if (stonk.id === next.id) {
-								return {
-									...next,
-									direction:
-										stonk.price < next.price
-											? 'up'
-											: stonk.price > next.price
-											? 'down'
-											: stonk.direction,
-								};
-							}
-							return stonk;
-						});
+					/**
+					 * Stock market close weekends! Fetching data to REST API endpoint instead of listening to WebSocket API
+					 */
+					if (
+						isWeekend(new Date()) &&
+						(market === 'IDX' || market === 'Nasdaq' || market === 'NYSE')
+					) {
+						setIsDisconnected(true);
+						ws.close();
+						setIsRedirect(true);
 					} else {
-						return [
-							...current,
-							{
-								...next,
-								direction: '',
-							},
-						];
+						/**
+						 * Subscribe to ticker
+						 */
+						ws.send(
+							JSON.stringify({
+								subscribe: (params.get('symbols') || ticker)
+									.split(',')
+									.map((symbol) => symbol.toUpperCase()),
+							})
+						);
 					}
-				});
-				setIsDataLoaded(true);
+				};
+
+				ws.onclose = function close() {
+					console.log(`${ticker} disconnected`);
+					setIsDisconnected(true);
+					setIsWebsocketOpen(false);
+
+					setWaitingToReconnect(true);
+
+					/**
+					 * Trigger re-run
+					 */
+					setTimeout(() => setWaitingToReconnect(null), 5000);
+				};
+
+				ws.onmessage = function incoming(message) {
+					/**
+					 * Decode gRPC buffer response
+					 */
+					const next: MessageBuffer = Yaticker.decode(new Buffer(message.data, 'base64'));
+					console.log(next);
+					setStonks((current) => {
+						let stonk = current.find((stonk) => stonk.id === next.id);
+						if (stonk) {
+							return current.map((stonk) => {
+								if (stonk.id === next.id) {
+									return {
+										...next,
+										direction:
+											stonk.price < next.price
+												? 'up'
+												: stonk.price > next.price
+												? 'down'
+												: stonk.direction,
+									};
+								}
+								return stonk;
+							});
+						} else {
+							return [
+								...current,
+								{
+									...next,
+									direction: '',
+								},
+							];
+						}
+					});
+					setIsDataLoaded(true);
+				};
+			});
+			return () => {
+				console.log('Cleanup');
+				clientRef.current = null;
+
+				ws.close();
 			};
-		});
-		return () => {
-			ws.close();
-		};
-	}, []);
+		}
+	}, [waitingToReconnect]);
 
 	return (
 		<tr className="text-xl border-b border-gray-100 cursor-pointer hover:bg-gray-50 transform transition duration-200 ease-in-out">
@@ -169,7 +184,9 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 					) : isRedirect ? (
 						<p className="text-sm text-gray-300 -sm:text-xs">Redirecting to REST API server...</p>
 					) : isDisconnected ? (
-						<p className="text-sm text-gray-300 -sm:text-xs">Disconnected from WebSocket server!</p>
+						<p className="text-sm text-gray-300 -sm:text-xs">
+							Disconnected from WebSocket server! Reconnecting...
+						</p>
 					) : isWebsocketConnected ? (
 						<p className="text-sm text-gray-300 -sm:text-xs">
 							Connected! Waiting for ticker response...

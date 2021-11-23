@@ -19,12 +19,6 @@ interface Props {
 	market?: MarketType;
 }
 
-/**
- * "Mau recode ngaca dulu bosss 😁🤙"
- * ~bocil termux
- *
- */
-
 const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	const [stonks, setStonks] = useState([]);
 	const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
