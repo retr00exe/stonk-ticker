@@ -27,7 +27,7 @@ export const isMarketOpen = (date: Date, market: string): boolean => {
 				(m.opening2[0].isBefore(moment(date)) && m.opening2[1].isAfter(moment(date)))
 			);
 		case 'Nasdaq':
-			m.opening = [moment('16:00', 'HH:mm'), moment('4:00', 'HH:mm')];
-			return m.opening[0].isBefore(moment(date)) && m.opening[1].isAfter(moment(date));
+			m.opening = [moment('16:00', 'HH:mm'), moment('07:00', 'HH:mm')];
+			return m.opening[0].isBefore(moment(date)) || m.opening[1].isAfter(moment(date));
 	}
 };

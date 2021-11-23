@@ -13,6 +13,8 @@ const NYSE = () => {
 					<tr>
 						<th className="py-5 px-8">Name</th>
 						<th className="py-5">Price</th>
+						<th className="py-5">Day Change</th>
+						<th className="py-5">Day Volume</th>
 					</tr>
 				</thead>
 				<tbody className="w-full">

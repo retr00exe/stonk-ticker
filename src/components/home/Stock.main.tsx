@@ -34,7 +34,6 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 	const [isDisconnected, setIsDisconnected] = useState<boolean>(false);
 	const [isRedirect, setIsRedirect] = useState<boolean>(false);
 	const [waitingToReconnect, setWaitingToReconnect] = useState<boolean>(null);
-	const [isWebsocketOpen, setIsWebsocketOpen] = useState<boolean>(false);
 	const clientRef = useRef(null);
 
 	const emojis = {
@@ -45,6 +44,10 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 
 	const formatPrice = (price: number) => {
 		return market === 'IDX' ? `Rp.${price.toFixed(2)}` : `$${price.toFixed(2)}`;
+	};
+
+	const formatPercentage = (price: number) => {
+		return price.toFixed(2) + '%';
 	};
 
 	useEffect(() => {
@@ -97,7 +100,6 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				ws.onclose = function close() {
 					console.log(`${ticker} disconnected`);
 					setIsDisconnected(true);
-					setIsWebsocketOpen(false);
 
 					setWaitingToReconnect(true);
 
@@ -166,14 +168,16 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 						}`}
 					/>
 					<div className="flex-cc -sm:col -sm:flex-ss">
-						<h1 className="font-semibold mr-3 -sm:text-sm">{name}</h1>
-						<h2 className="text-gray-400 font-light tracking-wider -sm:text-sm">
-							({sliceId(ticker)})
-						</h2>
+						<h1 className="font-semibold mr-3 -sm:text-sm">
+							{name}
+							<span className="text-gray-400 font-light tracking-wider -sm:text-sm ml-2">
+								({sliceId(ticker)})
+							</span>
+						</h1>
 					</div>
 				</td>
 			</Link>
-			<td className="w-1/4">
+			<td className="w-1/5">
 				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded ? (
 						<div className={`${stonks[0].direction} flex gap-2`}>
@@ -193,6 +197,27 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 						</p>
 					) : (
 						<p className="text-sm text-gray-300 -sm:text-xs">Connecting to WebSocket API...</p>
+					)}
+				</Link>
+			</td>
+			<td className="w-1/5">
+				<Link to={`/${market}/${ticker}`}>
+					{isDataLoaded && (
+						<div
+							className={`flex gap-2`}
+							style={{ color: `${stonks[0].changePercent < 0 ? 'red' : 'green'}` }}
+						>
+							<p className="-sm:text-sm">{formatPercentage(stonks[0].changePercent)}</p>
+						</div>
+					)}
+				</Link>
+			</td>
+			<td className="w-1/5">
+				<Link to={`/${market}/${ticker}`}>
+					{isDataLoaded && (
+						<div className={`flex gap-2`}>
+							<p className="-sm:text-sm">{stonks[0].dayVolume}</p>
+						</div>
 					)}
 				</Link>
 			</td>
