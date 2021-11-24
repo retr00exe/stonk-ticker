@@ -94,9 +94,9 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 						}`}
 					/>
 					<div className="flex-cc -sm:col -sm:flex-ss">
-						<h1 className="font-semibold mr-3 -sm:text-sm">
+						<h1 className="font-semibold mr-3 -sm:text-xs">
 							{name}
-							<span className="text-gray-400 font-light tracking-wider -sm:text-sm ml-2">
+							<span className="text-gray-400 font-light tracking-wider -sm:text-xs ml-2 -sm:ml-1">
 								({sliceId(ticker)})
 							</span>
 						</h1>
@@ -122,7 +122,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded && (
 						<div className={`flex gap-2`}>
-							<p className="-sm:text-sm">{formatPercentage(stonks[0].changePercent)}</p>
+							<p className="-sm:text-xs">{formatPercentage(stonks[0].changePercent)}</p>
 						</div>
 					)}
 				</Link>
@@ -131,7 +131,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded && (
 						<div className={`flex gap-2`}>
-							<p className="-sm:text-sm">{stonks[0].dayVolume}</p>
+							<p className="-sm:text-xs">{stonks[0].dayVolume}</p>
 						</div>
 					)}
 				</Link>

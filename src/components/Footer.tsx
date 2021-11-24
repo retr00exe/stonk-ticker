@@ -26,27 +26,15 @@ const Footer = (): JSX.Element => {
 					</div>
 					<div className="w-full sm:w-1/5 flex flex-col space-y-4">
 						<Link to="/about" className="opacity-60">
-							About Us
+							About
 						</Link>
-						<Link to="/" className="opacity-60">
-							Responsibilities
-						</Link>
-						<Link to="/" className="opacity-60">
-							Out Services
-						</Link>
-						<Link to="/contact" className="opacity-60">
-							Contact
+						<Link to="/feature" className="opacity-60">
+							Our Services
 						</Link>
 					</div>
 					<div className="w-full sm:w-1/5 flex flex-col space-y-4">
 						<Link to="/" className="opacity-60">
 							Disclaimer
-						</Link>
-						<Link to="/" className="opacity-60">
-							Testimonials
-						</Link>
-						<Link to="/" className="opacity-60">
-							Privacy Policy
 						</Link>
 						<Link to="/" className="opacity-60">
 							Terms of Service

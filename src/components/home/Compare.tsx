@@ -9,10 +9,10 @@ const Compare = () => {
 			<table className="w-full text-left border border-gray-100">
 				<thead className="w-full border-b border-gray-100">
 					<tr>
-						<th className="py-5 px-8">Name</th>
-						<th className="py-5">Price</th>
-						<th className="py-5">Change</th>
-						<th className="py-5">Day Volume</th>
+						<th className="py-5 px-8 -sm:text-xs">Name</th>
+						<th className="py-5 -sm:text-xs">Price</th>
+						<th className="py-5 -sm:text-xs">Change</th>
+						<th className="py-5 -sm:text-xs">Day Volume</th>
 					</tr>
 				</thead>
 				<tbody className="w-full">

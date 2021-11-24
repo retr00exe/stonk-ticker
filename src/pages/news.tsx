@@ -5,7 +5,7 @@ const About = (): JSX.Element => {
 	return (
 		<section className="w-full max-w-6xl mx-auto">
 			<div className="container">
-				<Header />
+				<h1 className="text-2xl font-semibold mb-6">Investor News</h1>
 			</div>
 		</section>
 	);

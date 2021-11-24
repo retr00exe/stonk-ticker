@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import { useParams } from 'react-router';
 import moment from 'moment';
+import { sliceId } from '@core/utils/string';
 
 const proxyUrl = process.env.REACT_APP_CORS_PROXY_URL;
 const stonksUrl = process.env.REACT_APP_REDACTED_REST_ENDPOINT;
@@ -46,7 +47,7 @@ const ChartData = () => {
 		},
 	]);
 
-	const { id } = useParams();
+	const { id, market } = useParams();
 
 	const [price, setPrice] = useState(null);
 	const [priceTime, setPriceTime] = useState(null);
@@ -84,9 +85,12 @@ const ChartData = () => {
 
 	return (
 		<div>
-			<div className="ticker">{id}</div>
-			<div>${price}</div>
-			<div className="price-time">{priceTime && priceTime.toLocaleTimeString()}</div>
+			<div className="text-3xl font-semibold">{sliceId(id)}</div>
+			<div className="text-lg font-semibold mb-2">
+				{market !== 'IDX' ? '$' : 'Rp.'}
+				{price}
+			</div>
+			<div className="price-time">Last update {priceTime && priceTime.toLocaleTimeString()}</div>
 			<Chart type="area" options={chart.options} series={series} width="100%" height={400} />
 		</div>
 	);

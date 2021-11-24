@@ -8,4 +8,6 @@ export const comparisonData = [
 	{ name: 'Doge', id: 'DOGE-USD', logo: '/icons/doge.svg' },
 	{ name: 'Solana', id: 'SOL1-USD', logo: '/icons/sol.svg' },
 	{ name: 'XRP', id: 'XRP-USD', logo: '/icons/xrp.svg' },
+	{ name: 'Gold', id: 'GC=F', logo: '/icons/gold.png' },
+	{ name: 'Silver', id: 'SI=F', logo: '/icons/silver.svg' },
 ];

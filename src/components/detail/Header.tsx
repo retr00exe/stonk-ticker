@@ -14,7 +14,9 @@ const Header = () => {
 	const data =
 		market === 'IDX'
 			? { ...filterData, market: 'Indonesia Stock Exchange (IDX)' }
-			: { ...filterData, market: 'Nasdaq Stock Exchange (Nasdaq)' };
+			: market === 'Nasdaq'
+			? { ...filterData, market: 'Nasdaq Stock Exchange (Nasdaq)' }
+			: { ...filterData, market: 'Others' };
 
 	return (
 		<div className="my-10 flex-bs">
@@ -24,7 +26,7 @@ const Header = () => {
 				</h1>
 				<p className="mt-2 text-gray-400 font-light text-lg -sm:text-sm">{data.market}</p>
 				<div className="flex-sc gap-4 mt-5">
-					<img src={data.logo} alt="BBCA" className="w-32 h-32 -sm:w-16 -sm:h-16" />
+					<img src={data.logo} alt={data.name} className="w-32 h-32 -sm:w-16 -sm:h-16" />
 				</div>
 			</div>
 			<div className="flex-cc gap-2 border py-2 px-4 -sm:px-2 -sm:py-1 rounded-full border-gray-500 cursor-pointer hover:border-darkBlue text-gray-500 hover:text-darkBlue transition duration-400 -sm:text-xs">
