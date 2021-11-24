@@ -28,7 +28,7 @@ const chart = {
 		xaxis: {
 			tickAmount: 4,
 			labels: {
-				rotate: 0,
+				rotate: -45,
 			},
 		},
 	},

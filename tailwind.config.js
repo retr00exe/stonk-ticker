@@ -9,6 +9,9 @@ module.exports = {
 				sm: '32px',
 			},
 		},
+		fontSize: {
+			xs: '.6rem',
+		},
 		extend: {
 			colors: {
 				base: '#ffffff',

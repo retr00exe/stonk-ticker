@@ -89,8 +89,8 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 						alt={name}
 						className={`${
 							market === 'IDX'
-								? 'w-12 h-12 mr-2 scale-75 -sm:w-10 -sm:h-10'
-								: 'w-12 h-12 mr-2 scale-75 -sm:w-8 -sm:h-8'
+								? 'w-12 h-12 mr-2 scale-75 -sm:w-6 -sm:h-6'
+								: 'w-12 h-12 mr-2 scale-75 -sm:w-4 -sm:h-4'
 						}`}
 					/>
 					<div className="flex-cc -sm:col -sm:flex-ss">
@@ -107,7 +107,7 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 				<Link to={`/${market}/${ticker}`}>
 					{isDataLoaded ? (
 						<div className={`${stonks[0].direction} flex gap-2`}>
-							<p className="-sm:text-sm">
+							<p className="-sm:text-xs">
 								{formatPrice(stonks[0].price)} {emojis[stonks[0].direction]}
 							</p>
 						</div>

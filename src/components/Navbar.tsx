@@ -26,7 +26,7 @@ const Navbar = (): JSX.Element => {
 								</Link>
 							</div>
 						</div>
-						<div className="hidden md:flex items-center space-x-1">
+						{/* <div className="hidden md:flex items-center space-x-1">
 							<Link to="/login" className="py-5 px-3">
 								Login
 							</Link>
@@ -36,7 +36,7 @@ const Navbar = (): JSX.Element => {
 							>
 								Signup
 							</Link>
-						</div>
+						</div> */}
 						<div className="md:hidden flex items-center">
 							<button className="mobile-menu-button">
 								<svg
