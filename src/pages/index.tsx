@@ -9,17 +9,17 @@ const Index = (): JSX.Element => {
 				<p>Select the available market</p>
 				<div className="grid grid-cols-2 -sm:grid-cols-1 gap-10 my-8">
 					<Link to="/Nasdaq" className="w-full h-full">
-						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc">
+						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc hover:scale-105 transform transition duration-200 ease-in-out">
 							<img src="/nasdaq.png" alt="nasdaq" className="object-cover scale-50" />
 						</div>
 					</Link>
-					<Link to="/Nasdaq" className="w-full h-full">
-						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc">
+					<Link to="/IDX" className="w-full h-full">
+						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc hover:scale-105 transform transition duration-200 ease-in-out">
 							<img src="/idx.png" alt="nasdaq" className="object-cover max-h-24" />
 						</div>
 					</Link>
-					<Link to="/Nasdaq" className="w-full h-full">
-						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc">
+					<Link to="/Crypto" className="w-full h-full">
+						<div className="bg-gray-100 rounded-xl cursor-pointer h-32 w-full flex-cc hover:scale-105 transform transition duration-200 ease-in-out">
 							{' '}
 							<img src="/eth.png" alt="nasdaq" className="object-cover max-h-24" />
 						</div>
