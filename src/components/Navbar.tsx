@@ -18,6 +18,15 @@ const Navbar = (): JSX.Element => {
 								</Link>
 							</div>
 							<div className="hidden md:flex items-center space-x-1">
+								<Link to="/Nasdaq" className="py-5 px-3 text-gray-700 hover:text-gray-900">
+									Nasdaq
+								</Link>
+								<Link to="/IDX" className="py-5 px-3 text-gray-700 hover:text-gray-900">
+									IDX
+								</Link>
+								<Link to="/Crypto" className="py-5 px-3 text-gray-700 hover:text-gray-900">
+									Crypto
+								</Link>
 								<Link to="/feature" className="py-5 px-3 text-gray-700 hover:text-gray-900">
 									Features
 								</Link>

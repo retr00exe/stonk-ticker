@@ -84,13 +84,13 @@ const ChartData = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="-sm:text-sm">
 			<div className="text-3xl font-semibold">{sliceId(id)}</div>
 			<div className="text-lg font-semibold mb-2">
 				{market !== 'IDX' ? '$' : 'Rp.'}
 				{price}
 			</div>
-			<div className="price-time">Last update {priceTime && priceTime.toLocaleTimeString()}</div>
+			<div className="">Last update {priceTime && priceTime.toLocaleTimeString()}</div>
 			<Chart type="area" options={chart.options} series={series} width="100%" height={400} />
 		</div>
 	);

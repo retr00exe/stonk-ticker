@@ -1,6 +1,6 @@
 import React from 'react';
-import StockRealtime from '@components/home/Stock.main';
-import StockStatic from '@components/home/Stock.closed';
+import StockRealtime from '@components/market/Stock.main';
+import StockStatic from '@components/market/Stock.closed';
 import { nasdaqData } from '@core/data/nasdaq';
 import { isWeekend, isMarketOpen } from '@core/utils/date';
 
@@ -23,7 +23,6 @@ const Nasdaq = () => {
 						<th className="py-5 px-8 -sm:text-xs">Name</th>
 						<th className="py-5 -sm:text-xs">Price</th>
 						<th className="py-5 -sm:text-xs">Day Change</th>
-						<th className="py-5 -sm:text-xs">Day Volume</th>
 					</tr>
 				</thead>
 				<tbody className="w-full">

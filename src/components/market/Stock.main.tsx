@@ -212,15 +212,6 @@ const Stock = ({ ticker, name, logo, market }: Props): JSX.Element => {
 					)}
 				</Link>
 			</td>
-			<td className="w-1/5">
-				<Link to={`/${market}/${ticker}`}>
-					{isDataLoaded && (
-						<div className={`flex gap-2`}>
-							<p className="-sm:text-xs">{stonks[0].dayVolume}</p>
-						</div>
-					)}
-				</Link>
-			</td>
 		</tr>
 	);
 };

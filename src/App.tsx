@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from '@components/_layouts/MainLayout';
-import Index from '@pages/index';
+import Market from '@pages/market';
 import Detail from '@pages/detail';
-import Login from '@pages/login';
 import About from '@pages/about';
 import Feature from '@pages/feature';
-import News from '@pages/news';
+import Index from '@pages/index';
 import './App.css';
 
 const App = () => {
@@ -14,11 +13,12 @@ const App = () => {
 			<MainLayout className="w-full py-0">
 				<Routes>
 					<Route path="/" element={<Index />} />
-					<Route path="/login" element={<Login />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/:market/:id" element={<Detail />} />
 					<Route path="/feature" element={<Feature />} />
-					<Route path="/news" element={<News />} />
+					<Route path="/IDX" element={<Market market="IDX" />} />
+					<Route path="/Nasdaq" element={<Market market="Nasdaq" />} />
+					<Route path="/Crypto" element={<Market market="Crypto" />} />
 				</Routes>
 			</MainLayout>
 		</Router>

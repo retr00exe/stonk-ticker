@@ -1,6 +1,6 @@
 import React from 'react';
-import StockRealtime from '@components/home/Stock.main';
-import StockStatic from '@components/home/Stock.closed';
+import StockRealtime from '@components/market/Stock.main';
+import StockStatic from '@components/market/Stock.closed';
 import { idxData } from '@core/data/idx';
 import { isWeekend, isMarketOpen } from '@core/utils/date';
 
@@ -13,7 +13,7 @@ const IDX = () => {
 		<div className="my-10 -sm:text-sm">
 			<h1 className="text-2xl font-semibold mb-6">
 				IDX Market{' '}
-				<span className="text-sm text-red-500">
+				<span className="text-sm -sm:text-xs text-red-500">
 					{!isOpen && '(The market is closed right now)'}
 				</span>
 			</h1>
@@ -23,7 +23,6 @@ const IDX = () => {
 						<th className="py-5 px-8 -sm:text-xs">Name</th>
 						<th className="py-5 -sm:text-xs">Price</th>
 						<th className="py-5 -sm:text-xs">Day Change</th>
-						<th className="py-5 -sm:text-xs">Day Volume</th>
 					</tr>
 				</thead>
 				<tbody className="w-full">
