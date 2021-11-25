@@ -65,7 +65,7 @@ const Footer = (): JSX.Element => {
 				</div>
 			</div>
 			<div className="sm:hidden">
-				<div className="w-full drop-shadow-2xl bg-gray-50 fixed bottom-0 z-50 flex-cc py-2 -sm:text-sm">
+				<div className="w-full drop-shadow-2xl bg-gray-50 fixed bottom-0 z-50 flex-cc py-2 -sm:text-sm border-t border-gray-200">
 					<div className="w-full sm:w-1/5 flex-cc gap-12">
 						<Link to="/" className="opacity-60">
 							<AiOutlineHome size={20} />
