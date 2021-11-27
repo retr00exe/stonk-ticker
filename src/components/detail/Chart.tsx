@@ -51,7 +51,7 @@ const ChartData = () => {
 
 	const [price, setPrice] = useState(null);
 	const [priceTime, setPriceTime] = useState(null);
-	const [selectedTimeRange, setSelectedTimeRange] = useState<string>('1y');
+	const [selectedTimeRange, setSelectedTimeRange] = useState<string>('1mo');
 
 	useEffect(() => {
 		async function getLatestPrice() {
@@ -95,9 +95,9 @@ const ChartData = () => {
 				Last update today at {priceTime && priceTime.toLocaleTimeString()}
 			</div>
 			<Chart type="area" options={chart.options} series={series} width="100%" height={400} />
-			<div className="flex-bc mb-3">
+			<div className="flex-bc mb-3 -sm:col">
 				<h3 className="text-2xl font-bold">Share Price Chart</h3>
-				<div className="flex overflow-x-auto p-2 bg-gray scroll-bar-hidden -sm:hidden">
+				<div className="flex overflow-x-auto p-2 bg-gray scroll-bar-hidden">
 					<button
 						onClick={() => setSelectedTimeRange('5d')}
 						className={`flex-shrink-0 transition-colors w-max font-bold py-2 px-3 text-sm ${
