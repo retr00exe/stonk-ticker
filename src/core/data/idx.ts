@@ -9,4 +9,18 @@ export const idxData = [
 	{ name: 'Bank Syariah Indonesia Tbk', id: 'BRIS.JK', logo: '/icons/bris.png' },
 	{ name: 'Bank Negara Indonesia (Persero) Tbk', id: 'BBNI.JK', logo: '/icons/bbni.png' },
 	{ name: 'Kalbe Farma Tbk', id: 'KLBF.JK', logo: '/icons/klbf.png' },
+	{ name: 'Adhi Karya (Persero) Tbk.', id: 'ADHI.JK', logo: '/icons/adhi.png' },
+	{ name: 'Ace Hardware Indonesia Tbk.', id: 'ACES.JK', logo: '/icons/aces.png' },
+	{ name: 'Bank Jago Tbk.', id: 'ARTO.JK', logo: '/icons/arto.png' },
+	{ name: 'Bank Tabungan Negara (Persero)', id: 'BBTN.JK', logo: '/icons/bbtn.png' },
+	{ name: 'Bank Danamon Indonesia Tbk.', id: 'BDMN.JK', logo: '/icons/bdmn.png' },
+	{ name: 'Ciputra Development Tbk.', id: 'CTRA.JK', logo: '/icons/ctra.png' },
+	{ name: 'XL Axiata Tbk.', id: 'EXCL.JK', logo: '/icons/excl.png' },
+	{ name: 'Smartfren Telecom Tbk.', id: 'FREN.JK', logo: '/icons/fren.png' },
+	{ name: 'Gudang Garam Tbk.', id: 'GGRM.JK', logo: '/icons/ggrm.png' },
+	{ name: 'Indofood CBP Sukses Makmur Tbk.', id: 'ICBP.JK', logo: '/icons/icbp.png' },
+	{ name: 'Indosat Tbk.', id: 'ISAT.JK', logo: '/icons/isat.png' },
+	{ name: 'Kimia Farma Tbk.', id: 'KAEF.JK', logo: '/icons/kaef.png' },
+	{ name: 'Bank Mega Tbk.', id: 'MEGA.JK', logo: '/icons/mega.png' },
+	{ name: 'Metrodata Electronics Tbk.', id: 'MTDL.JK', logo: '/icons/mtdl.png' }
 ];

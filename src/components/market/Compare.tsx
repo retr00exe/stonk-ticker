@@ -22,6 +22,7 @@ const Compare = () => {
 							logo={item.logo}
 							order={index + 1}
 							key={item.id}
+							market="Compare"
 						/>
 					))}
 				</tbody>
